@@ -27,8 +27,17 @@ import AppLogo from '~/components/AppLogo.vue'
 
 export default {
   components: {
-    AppLogo
+    "app-logo": AppLogo
+  },
+  mounted: function () {
+    this.fetchSomething();
+  },
+  methods: {
+  async fetchSomething() {
+    const ip = await this.$axios.$get('http://icanhazip.com');
+    console.log(ip);
   }
+}
 }
 </script>
 
