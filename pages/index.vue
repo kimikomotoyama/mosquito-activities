@@ -9,6 +9,7 @@
         <city-lists />
       </div>
       <nuxt-link to="/about">About the author</nuxt-link>
+      <div>{{$store.state["setStars"]}}</div>
     </div>
   </section>
 </template>
@@ -22,20 +23,12 @@ export default {
     console.log(params);
     return {sayHi: "hi"};
   },
-  fetch ({ store, params }) {
-    // return axios.get('http://my-api/stars')
-    // .then((res) => {
-    //   store.commit('setStars', res.data)
-    // })
-    // store.commit('cities', this.cities);
-  },
   components: {
     "app-logo": AppLogo,
     "city-lists": CityList,
   },
   mounted: async function () {
     await this.fetchSomething();
-    console.log(process.env.API_KEY);
   },
   data: () => ({
     tokyoArea: "TokyoArea",

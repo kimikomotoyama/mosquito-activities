@@ -734,8 +734,23 @@ const createStore = () => {
                         "MinuteCast"
                     ]
                 }
+            ],
+            //for Shirakawa
+            MosquitoActivities: [
+                {
+                    "Name": "Mosquito Activity Forecast",
+                    "ID": 17,
+                    "Ascending": true,
+                    "LocalDateTime": "2018-08-13T07:00:00+09:00",
+                    "EpochDateTime": 1534111200,
+                    "Value": 10.0,
+                    "Category": "Extreme",
+                    "CategoryValue": 5,
+                    "MobileLink": "http://m.accuweather.com/en/jp/shirakawa/1511680/mosquito-activity/1511680?lang=en-us",
+                    "Link": null
+                }
             ]
-          },
+        },
     })
 }
 
