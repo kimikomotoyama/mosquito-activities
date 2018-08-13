@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 module.exports = {
   /*
   ** Headers of the page
@@ -16,7 +18,9 @@ module.exports = {
   modules: [
     '@nuxtjs/axios',
   ],
-
+  env: {
+    API_KEY: process.env.API_KEY
+  },
   axios: {
     // proxyHeaders: false
   },

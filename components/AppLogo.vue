@@ -4,8 +4,16 @@
     <div class="Triangle Triangle--one"/>
     <div class="Triangle Triangle--three"/>
     <div class="Triangle Triangle--four"/>
+    {{hi}}
   </div>
 </template>
+
+<script>
+export default {
+  props: ["hi"]
+}
+</script>
+
 
 <style>
 .VueToNuxtLogo {
