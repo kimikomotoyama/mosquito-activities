@@ -9,6 +9,7 @@ const knex = require('knex')({
     }
 });
 const moment = require("moment");
+const axios = require("axios");
 
 app.set("port", port);
 
@@ -33,10 +34,16 @@ app.get("/locations", async (req, res) => {
     console.log(req.params);
     console.log(req.body);
 
-    const locations = await knex.select().from('locations');
+    const locations = await knex.select().from('locations')
+    .whereRaw("date_trunc('day', created_at) = date_trunc('day', now())");
     console.log(locations);
 
-    res.status(200).send(locations);
+    if (locations.length > 0) {
+        res.status(200).send(locations);
+    } else {
+
+    }
+        
 });
 
 start();
