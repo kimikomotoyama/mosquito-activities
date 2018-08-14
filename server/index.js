@@ -28,22 +28,69 @@ async function start() {
     });
 }
 
-app.get("/locations", async (req, res) => {
-    console.log("locations server side");
-    console.log(req.query);
-    console.log(req.params);
-    console.log(req.body);
+app.get("/activities", async (req, res) => {
+    console.log("activities server side");
 
-    const locations = await knex.select().from('locations')
-    .whereRaw("date_trunc('day', created_at) = date_trunc('day', now())");
-    console.log(locations);
+    //Get master city database
+    let cities = await knex.select().from('cities');
+    if (cities.length === 0) {
+        console.log("creating cities master db");
+        const tokyoKey = "226396";
+        const accuAPIUrl = `http://dataservice.accuweather.com/locations/v1/cities/neighbors/${tokyoKey}?apikey=${process.env.API_KEY}`;
+        const tokyoArea = await axios.get(accuAPIUrl);
 
-    if (locations.length > 0) {
-        res.status(200).send(locations);
-    } else {
-
+        let citiesArray = [];
+        tokyoArea.data.forEach((city) => {
+            const obj = {
+                "key": city.Key,
+                "city": city.EnglishName,
+                "latitude": city.GeoPosition.Latitude,
+                "longitude": city.GeoPosition.Longitude,
+                "created_at": new Date(),
+                "updated_at": new Date()
+            }
+            console.log(obj);
+            citiesArray.push(obj);
+        });
+        await knex('cities').insert(citiesArray);
+        cities = await knex.select().from('cities');
     }
-        
+   
+    const activities = await knex.select().from('activities')
+    .whereRaw("date_trunc('day', updated_at) = date_trunc('day', now())");
+
+    if (activities.length > 0) {
+        res.status(200).send(activities);
+    } 
+    else {
+        console.log("create new db for activity");
+        //Get mosquito activity from API
+        let knexPromiseArray = [];
+        for (const index in cities) {
+            const key = cities[index].key;
+            const accuAPIUrl = `http://dataservice.accuweather.com/indices/v1/daily/1day/${key}/17?apikey=${process.env.API_KEY}`;
+            knexPromiseArray.push(axios.get(accuAPIUrl));
+        }
+    
+        const result = await Promise.all(knexPromiseArray);
+        const activitiesModel = result.map((response, index) => {
+            return { 
+                key: String(cities[index].key),
+                city: cities[index].city,
+                value: response.data[0].Value,
+                category: response.data[0].Category,
+                categoryValue: response.data[0].CategoryValue,
+                mobileLink: response.data[0].MobileLink,
+                latitude: Number(cities[index].latitude),
+                longitude: Number(cities[index].longitude),
+                created_at: new Date(),
+                updated_at: new Date(),
+            }
+        });
+        await knex('activities').insert(activitiesModel);
+        res.status(200).send(activitiesModel);
+    }
+
 });
 
 start();

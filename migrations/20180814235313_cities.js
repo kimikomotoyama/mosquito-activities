@@ -1,16 +1,15 @@
 
 exports.up = function(knex, Promise) {
-  return knex.schema.createTable('locations', function (table) {
+  return knex.schema.createTable('cities', function (table) {
     table.increments();
-    table.string('city');
     table.string('key');
+    table.string('city');
     table.decimal('latitude', 8, 3);
     table.decimal('longitude', 8, 3);
-    table.string('mosquito_activity');
     table.timestamps();
   })
 };
 
 exports.down = function(knex, Promise) {
-  return knex.schema.dropTable('locations');
+  return knex.schema.dropTable('cities');
 };

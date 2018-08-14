@@ -32,7 +32,7 @@ import axios from "axios";
 export default {
     mounted: async function() {
         console.log("mounted in map");
-        const { data: locations } = await axios.get("/locations");
+        const { data: locations } = await axios.get("/activities");
         console.log(locations);
         this.markers = locations;
     },
