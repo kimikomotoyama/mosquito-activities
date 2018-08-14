@@ -23,7 +23,7 @@ import * as VueGoogleMaps from 'vue2-google-maps';
 
 export default {
   asyncData(params) {
-    console.log(params);
+    // console.log(params);
     return {sayHi: "hi"};
   },
   components: {

@@ -751,6 +751,11 @@ const createStore = () => {
                 }
             ]
         },
+        mutations: {
+            getActivities() {
+                console.log("activities");
+            }
+        }
     })
 }
 

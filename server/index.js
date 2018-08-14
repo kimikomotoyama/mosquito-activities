@@ -1,8 +1,14 @@
 const express = require("express");
 const { Nuxt, Builder } = require("nuxt");
 const app = express();
-
 const port = process.env.PORT || 3000;
+const knex = require('knex')({
+    client: 'pg',
+    connection: {
+        database : 'mosquito'
+    }
+});
+const moment = require("moment");
 
 app.set("port", port);
 
@@ -20,5 +26,17 @@ async function start() {
         console.log(`Listening on port ${port}...`);
     });
 }
+
+app.get("/locations", async (req, res) => {
+    console.log("locations server side");
+    console.log(req.query);
+    console.log(req.params);
+    console.log(req.body);
+
+    const locations = await knex.select().from('locations');
+    console.log(locations);
+
+    res.status(200).send(locations);
+});
 
 start();

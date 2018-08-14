@@ -11,14 +11,14 @@
                     :key="index"
                     v-for="(m, index) in markers"
                     :position="{
-                                lat: m.GeoPosition.Latitude,
-                                lng: m.GeoPosition.Longitude
+                                lat: Number(m.latitude),
+                                lng: Number(m.longitude)
                             }"
                     :clickable="true"
                     :draggable="true"
                     @click="center={
-                                lat: m.GeoPosition.Latitude,
-                                lng: m.GeoPosition.Longitude
+                                lat: Number(m.latitude),
+                                lng: Number(m.longitude)
                             }"
                 />
             </GmapMap>
@@ -27,15 +27,17 @@
 </template>
 
 <script>
+import axios from "axios";
 
 export default {
-    computed: {
-        markers: function() {
-            return this.$store.state["TokyoArea"];
-        }
+    mounted: async function() {
+        console.log("mounted in map");
+        const { data: locations } = await axios.get("/locations");
+        console.log(locations);
+        this.markers = locations;
     },
-    mounted: function() {
-        console.log(this.$store.state["TokyoArea"]);
-    }
+    data: () => ({
+        markers: []
+    })
 }
 </script>
