@@ -19,7 +19,8 @@ module.exports = {
     '@nuxtjs/axios',
   ],
   env: {
-    API_KEY: process.env.API_KEY
+    API_KEY: process.env.API_KEY,
+    GOOGLE_MAP_API: process.env.GOOGLE_MAP_API
   },
   axios: {
     // proxyHeaders: false
@@ -31,17 +32,29 @@ module.exports = {
   /*
   ** Build configuration
   */
+  plugins: ["~/plugins/vue2-google-maps.js"],
   build: {
     /*
     ** Run ESLint on save
     */
-    extend (config, { isDev, isClient }) {
+    extend (config, { isDev, isClient, isServer }) {
       if (isDev && isClient) {
         config.module.rules.push({
           enforce: 'pre',
           test: /\.(js|vue)$/,
           loader: 'eslint-loader',
           exclude: /(node_modules)/
+        })
+      }
+      if (isServer) {
+        // This instructs Webpack to include `vue2-google-maps`'s Vue files
+        // for server-side rendering
+        config.externals.splice(0, 0, function (context, request, callback) {
+          if (/^vue2-google-maps($|\/)/.test(request)) {
+            callback(null, false)
+          } else {
+            callback()
+          }
         })
       }
     }

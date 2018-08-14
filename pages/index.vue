@@ -1,6 +1,7 @@
 <template>
   <section class="container">
     <div>
+      <google-map />
       <app-logo :hi="sayHi"/>
       <h1 class="title">
         mosquito-activities
@@ -17,6 +18,8 @@
 <script>
 import AppLogo from '~/components/AppLogo.vue';
 import CityList from '~/components/CityList.vue';
+import GoogleMap from '~/components/Map.vue';
+import * as VueGoogleMaps from 'vue2-google-maps';
 
 export default {
   asyncData(params) {
@@ -26,9 +29,11 @@ export default {
   components: {
     "app-logo": AppLogo,
     "city-lists": CityList,
+    "google-map": GoogleMap,
   },
   mounted: async function () {
     await this.fetchSomething();
+    console.log("api: " + process.env.API_KEY);
   },
   data: () => ({
     tokyoArea: "TokyoArea",
