@@ -2,18 +2,20 @@ const express = require("express");
 const { Nuxt, Builder } = require("nuxt");
 const app = express();
 const port = process.env.PORT || 3000;
-const knex = require('knex')({
-    client: 'pg',
-    connection: {
-        database : 'mosquito'
-    }
-});
-const moment = require("moment");
+const knexfile = require("../knexfile");
+// const moment = require("moment");
 const axios = require("axios");
-const cors = require("cors");
+// const cors = require("cors");
 
 const config = require("../nuxt.config.js");
 config.dev = process.env.NODE_ENV !== "production";
+
+let knex;
+if (config.dev) {
+    knex = require('knex')(knexfile.development);
+} else {
+    knex = require('knex')(knexfile.production);
+}
 
 async function start() {
     const nuxt = new Nuxt(config);
