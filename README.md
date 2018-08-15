@@ -9,7 +9,7 @@ See where the mosquito activities are at its highest to prepare for your outdoor
 
 ## Features
 
-![Preview](./img/preview.png "preview")
+![Preview](./static/preview.png "preview")
 
 A few of the things you can do with this application:
 
