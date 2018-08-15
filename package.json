@@ -11,10 +11,12 @@
     "generate": "nuxt generate",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "precommit": "npm run lint",
-    "postinstall": "yarn build && knex migrate:latest"
+    "heroku-postbuild": "yarn build && knex migrate:latest",
+    "migrate": "knex migrate:latest"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.3.1",
+    "cors": "^2.8.4",
     "cross-env": "^5.2.0",
     "dotenv": "^6.0.0",
     "express": "^4.16.3",

@@ -38,7 +38,7 @@ export default {
   }),
   methods: {
   async getActivities() {
-    const locations = await this.$axios.$get('/activities');
+    const locations = await axios.get('/activities');
     this.locations = locations;
   }
 }
