@@ -2,7 +2,7 @@
   <section class="container">
     <div>
       <h1 class="title">
-        mosquito-activities
+        <img src="/bug_ka.png" />mosquito-activities
       </h1>
       <google-map :markers="locations"/>
       <div class="subtitle">
@@ -62,6 +62,7 @@ export default {
   font-size: 100px;
   color: #35495e;
   letter-spacing: 1px;
+  margin-bottom: 10px;
 }
 
 .subtitle {

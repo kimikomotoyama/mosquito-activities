@@ -5,7 +5,7 @@ This was created during my time as a student at Code Chrysalis.
 
 See where the mosquito activities are at its highest to prepare for your outdoor events in Tokyo area! This application will show you the visualization of where the mosquito activities are at each location.
 
-[>> Try the Demo <<](https://something.com/)
+[>> Try the Demo <<](https://mighty-fortress-33766.herokuapp.com/)
 
 ## Features
 
