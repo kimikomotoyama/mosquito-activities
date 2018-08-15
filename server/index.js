@@ -53,7 +53,8 @@ async function start() {
         const activities = await knex.select().from('activities')
         .whereRaw("date_trunc('day', updated_at) = date_trunc('day', now())");
     
-        if (activities.length > 0) {
+        const getFromDatabase = (activities.length > 0);
+        if (getFromDatabase) {
             res.status(200).json(activities);
         } 
         else {
