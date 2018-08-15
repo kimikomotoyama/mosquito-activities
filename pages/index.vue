@@ -10,7 +10,7 @@
       </div>
       <app-logo :hi="sayHi"/>
       <nuxt-link to="/about">About the author</nuxt-link>
-      <div class="api">API provided by:<img class="aw-logo" src="~/assets/AW_RGB.jpg"/></div>
+      <div class="api">API provided by:<img class="aw-logo" src="/AW_RGB.jpg"/></div>
     </div>
   </section>
 </template>
@@ -30,7 +30,6 @@ export default {
   },
   mounted: async function () {
     await this.getActivities();
-    console.log("api: " + process.env.API_KEY);
   },
   data: () => ({
     tokyoArea: "TokyoArea",

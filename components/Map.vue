@@ -14,6 +14,8 @@
                                 lat: Number(m.latitude),
                                 lng: Number(m.longitude)
                             }"
+                    :icon="{url: '/bug_ka.png'}"
+
                     :clickable="true"
                     :draggable="true"
                     @click="center={
@@ -30,6 +32,6 @@
 import axios from "axios";
  
 export default {
-    props: ["markers"],
+    props: ["markers"]
 }
 </script>
