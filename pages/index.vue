@@ -10,7 +10,7 @@
       </div>
       <app-logo :hi="sayHi"/>
       <nuxt-link to="/about">About the author</nuxt-link>
-      <div>{{$store.state["setStars"]}}</div>
+      <div class="api">API provided by:<img class="aw-logo" src="~/assets/AW_RGB.jpg"/></div>
     </div>
   </section>
 </template>
@@ -35,7 +35,7 @@ export default {
   data: () => ({
     tokyoArea: "TokyoArea",
     locations: [],
-    sayHi: "Hi"
+    sayHi: "km"
   }),
   methods: {
   async getActivities() {
@@ -75,6 +75,14 @@ export default {
 
 .links {
   padding-top: 15px;
+}
+
+.api {
+  margin: 50px;
+}
+.aw-logo {
+  width: 250px;
+  height: 40px;
 }
 </style>
 
