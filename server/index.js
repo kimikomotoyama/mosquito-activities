@@ -27,6 +27,8 @@ async function start() {
     
         //Get master city database
         let cities = await knex.select().from('cities');
+        console.log("after select query for cities");
+        console.log(cities);
         if (cities.length === 0) {
             console.log("creating cities master db");
             const tokyoKey = "226396";
@@ -50,11 +52,15 @@ async function start() {
             cities = await knex.select().from('cities');
         }
        
+        console.log("select query for activities");
         const activities = await knex.select().from('activities')
         .whereRaw("date_trunc('day', updated_at) = date_trunc('day', now())");
+        console.log("after query for activities");
+        console.log(activities);
     
         const getFromDatabase = (activities.length > 0);
         if (getFromDatabase) {
+            console.log("getting things from database");
             res.status(200).json(activities);
         } 
         else {
