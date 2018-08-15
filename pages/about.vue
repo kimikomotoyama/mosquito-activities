@@ -1,5 +1,5 @@
 <template>
     <div>
-        About
+        Kimiko Motoyama
     </div>
 </template>

@@ -1,14 +1,14 @@
 <template>
   <section class="container">
     <div>
-      <google-map />
-      <app-logo :hi="sayHi"/>
       <h1 class="title">
         mosquito-activities
-      </h1>>>
+      </h1>
+      <google-map :markers="locations"/>
       <div class="subtitle">
-        <city-lists />
+        <city-lists :cities="locations"/>
       </div>
+      <app-logo :hi="sayHi"/>
       <nuxt-link to="/about">About the author</nuxt-link>
       <div>{{$store.state["setStars"]}}</div>
     </div>
@@ -20,28 +20,27 @@ import AppLogo from '~/components/AppLogo.vue';
 import CityList from '~/components/CityList.vue';
 import GoogleMap from '~/components/Map.vue';
 import * as VueGoogleMaps from 'vue2-google-maps';
+import axios from "axios";
 
 export default {
-  asyncData(params) {
-    // console.log(params);
-    return {sayHi: "hi"};
-  },
   components: {
     "app-logo": AppLogo,
     "city-lists": CityList,
     "google-map": GoogleMap,
   },
   mounted: async function () {
-    await this.fetchSomething();
+    await this.getActivities();
     console.log("api: " + process.env.API_KEY);
   },
   data: () => ({
     tokyoArea: "TokyoArea",
+    locations: [],
+    sayHi: "Hi"
   }),
   methods: {
-  async fetchSomething() {
-    const ip = await this.$axios.$get('http://icanhazip.com');
-    console.log(ip);
+  async getActivities() {
+    const locations = await this.$axios.$get('/activities');
+    this.locations = locations;
   }
 }
 }
@@ -54,6 +53,7 @@ export default {
   justify-content: center;
   align-items: center;
   text-align: center;
+  margin-bottom: 50px;
 }
 
 .title {

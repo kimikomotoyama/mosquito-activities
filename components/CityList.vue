@@ -13,10 +13,13 @@ export default {
     components: {
         City
     },
-    computed: {
-        cities: function() {
-            return this.$store.state["TokyoArea"];
-        },
-    }
+    props: ["cities"]
 }
 </script>
+
+<style>
+    .city-lists {
+        background-color:#F5F5F5;
+        padding: 5px;
+    }
+</style>

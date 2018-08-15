@@ -1,28 +1,24 @@
 <template>
     <div class="city">
-        City: {{city.EnglishName}},
-        Key: {{city.Key}},
-        Latitude: {{city.GeoPosition.Latitude}},
-        Longitude: {{city.GeoPosition.Longitude}}
-        <mosquito
-            v-for="mosquito in mosquitoes" :key="mosquito.id"
-            v-bind:mosquito="mosquito"
-        />
+        <div>City: {{city.city}}</div>
+        <div>Mosquito activity: {{city.category}}</div>
+        <div>Mosquito activity level: {{city.categoryValue}}</div>
+        <a :href="city.mobileLink">Details</a>
     </div>
 </template>
 
 <script>
-import Mosquito from '~/components/Mosquito.vue';
-
 export default {
     props:["city"],
-    components: {
-        "mosquito": Mosquito
-    },
-    computed: {
-        mosquitoes: function() {
-            return this.$store.state["MosquitoActivities"];
-        }
-    }
 }
 </script>
+
+<style>
+    .city {
+        text-align: left;
+        font-size: 15px;
+        margin: 10px;
+        padding: 5px;
+        background-color: #FFFFFF;
+    }
+</style>

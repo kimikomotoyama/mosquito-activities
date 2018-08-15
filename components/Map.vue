@@ -5,7 +5,7 @@
                 :center="{lat:35.683, lng:139.804}"
                 :zoom="14"
                 map-type-id="terrain"
-                style="width: 100%; height: 300px"
+                style="width: 100%; height: 400px"
             >
                 <GmapMarker
                     :key="index"
@@ -28,16 +28,8 @@
 
 <script>
 import axios from "axios";
-
+ 
 export default {
-    mounted: async function() {
-        console.log("mounted in map");
-        const { data: locations } = await axios.get("/activities");
-        console.log(locations);
-        this.markers = locations;
-    },
-    data: () => ({
-        markers: []
-    })
+    props: ["markers"],
 }
 </script>

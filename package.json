@@ -30,6 +30,7 @@
     "eslint-friendly-formatter": "^3.0.0",
     "eslint-loader": "^1.7.1",
     "eslint-plugin-vue": "^4.0.0",
-    "nodemon": "^1.18.3"
+    "nodemon": "^1.18.3",
+    "vue-cli-plugin-vuetify": "^0.1.6"
   }
 }
