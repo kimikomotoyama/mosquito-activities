@@ -54,7 +54,7 @@ async function start() {
         .whereRaw("date_trunc('day', updated_at) = date_trunc('day', now())");
     
         if (activities.length > 0) {
-            res.status(200).send(activities);
+            res.status(200).json(activities);
         } 
         else {
             console.log("create new db for activity");
@@ -82,7 +82,7 @@ async function start() {
                 }
             });
             await knex('activities').insert(activitiesModel);
-            res.status(200).send(activitiesModel);
+            res.status(200).json(activitiesModel);
         }
     
     });
