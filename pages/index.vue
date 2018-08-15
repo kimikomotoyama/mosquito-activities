@@ -39,7 +39,7 @@ export default {
   methods: {
   async getActivities() {
     const locations = await axios.get('/activities');
-    this.locations = locations;
+    this.locations = locations.data;
   }
 }
 }

@@ -21,7 +21,7 @@ async function start() {
         const builder = new Builder(nuxt);
         await builder.build();
     }
-    app.use(cors());
+    // app.use(cors());
     app.get("/activities", async (req, res) => {
         console.log("activities server side");
     
